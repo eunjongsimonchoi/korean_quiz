@@ -141,7 +141,17 @@ def render_row(jamo, result):
 
 
 def start_new_game(words):
-    answer_item = random.choice(words)
+    # 정답 후보에서 외래어 제외
+    answer_candidates = [
+        item for item in words
+        if item.get("word_type", "") != "외래어"
+    ]
+
+    # 혹시 필터 결과가 비어 있으면 전체 단어 사용
+    if not answer_candidates:
+        answer_candidates = words
+
+    answer_item = random.choice(answer_candidates)
 
     st.session_state.answer_item = answer_item
     st.session_state.answer_word = answer_item["word"]
