@@ -110,37 +110,30 @@ def load_words():
 
 
 def render_row(jamo, result):
-    cols = st.columns(5)
-
     color_map = {
         "정위치": "#4CAF50",
         "위치다름": "#FFC107",
         "없음": "#9E9E9E"
     }
 
+    cells = ""
+
     for i in range(5):
         color = color_map[result[i]]
+        cells += f"""
+        <div class="jamo-cell" style="background-color: {color};">
+            {jamo[i]}
+        </div>
+        """
 
-        cols[i].markdown(
-            f"""
-            <div style="
-                width: 56px;
-                height: 56px;
-                background-color: {color};
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 28px;
-                font-weight: bold;
-                border-radius: 8px;
-                margin-bottom: 8px;
-            ">
-                {jamo[i]}
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+    st.markdown(
+        f"""
+        <div class="jamo-row">
+            {cells}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 def start_new_game(words):
@@ -162,6 +155,50 @@ def main():
     )
 
     st.title("한글 자모 퀴즈")
+    st.markdown(
+    """
+    <style>
+    .jamo-row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 8px;
+        margin-bottom: 14px;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .jamo-cell {
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        border-radius: 8px;
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+    }
+
+    @media (max-width: 480px) {
+        .jamo-row {
+            gap: 6px;
+        }
+
+        .jamo-cell {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            font-size: 24px;
+            border-radius: 7px;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
     st.write("표준국어대사전 단어를 자모 5칸으로 맞히는 게임입니다. 표준 국어 대사전 데이터를 기반으로 합니다.")
 
     words = load_words()
