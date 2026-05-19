@@ -156,13 +156,13 @@ def start_new_game(words):
 
 def main():
     st.set_page_config(
-        page_title="자모야구",
+        page_title="한글 자모 퀴즈!",
         page_icon="🎯",
         layout="centered"
     )
 
-    st.title("자모야구")
-    st.write("표준국어대사전 단어를 자모 5칸으로 맞히는 게임입니다.")
+    st.title("한글 자모 퀴즈")
+    st.write("표준국어대사전 단어를 자모 5칸으로 맞히는 게임입니다. 표준 국어 대사전 데이터를 기반으로 합니다.")
 
     words = load_words()
     allowed_words = {item["word"]: item for item in words}
