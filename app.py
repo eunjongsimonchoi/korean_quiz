@@ -181,15 +181,16 @@ def main():
 
     st.write(f"남은 횟수: {max_try - len(st.session_state.history)} / {max_try}")
 
-    guess_word = st.text_input(
-        "단어 입력",
-        disabled=st.session_state.game_over
-    )
+    with st.form("guess_form", clear_on_submit=True):
+        guess_word = st.text_input(
+            "단어 입력",
+            disabled=st.session_state.game_over
+        )
 
-    submit = st.button(
-        "입력",
-        disabled=st.session_state.game_over
-    )
+        submit = st.form_submit_button(
+            "입력",
+            disabled=st.session_state.game_over
+        )
 
     if submit:
         guess_word = guess_word.strip()
