@@ -167,7 +167,7 @@ def main():
     words = load_words()
     allowed_words = {item["word"]: item for item in words}
 
-    max_try = 6
+    max_try = 5
 
     if "answer_word" not in st.session_state:
         start_new_game(words)
@@ -256,8 +256,8 @@ def main():
         st.rerun()
 
     # 개발 중 정답 확인용. 배포할 때는 주석 처리하세요.
-    with st.expander("개발용 정답 확인"):
-        st.write(st.session_state.answer_word)
+    #with st.expander("개발용 정답 확인"):
+        #st.write(st.session_state.answer_word)
         st.write(" ".join(st.session_state.answer_jamo))
 
 
